@@ -15,16 +15,18 @@ class ListDE
 {
 	private:
 		
-		node *raiz;
-		int size;
+		node *raiz; //Nó inicial da lista.
+		node *last; //Nó final da lista.
+		int size; //Tamanho da lista.
 		
 	public:
 		
-		/* Construtor da classe ListDE, define valores iniciais para a raiz e o tamanho.
+		/* Construtor da classe ListDE, define valores iniciais para a raiz, last e o tamanho.
 		 */ 
 		ListDE()
 		{
 			raiz = NULL;
+			last = NULL;
 			size = 0;
 		}
 		
@@ -48,6 +50,27 @@ class ListDE
 			}
 			printf("\n");//Pula uma linha para manter a organização.
 		}
+		
+		/* Função para exibir todos os elementos da lista em ordem invertida.
+		 */
+		void printListReverse()
+		{
+			
+			if(raiz == NULL) //Se a raiz for nula, a lista está vazia, informa isso e finaliza a função.
+			{
+				printf("Lista vazia\n");
+				return;
+			}
+			
+			node *aux = last; //Nó auxiliar para percorrer a lista.
+			
+			while(aux != NULL)//Percorre os elementos da lista.
+			{
+				printf("%d ", aux->valor);//Exibe o valor armazenado no nó atual.
+				aux = aux->prev; //O nó atual se torna o nó anterior.
+			}
+			printf("\n");//Pula uma linha para manter a organização.
+		}
 
 		/* Insere um elemento à direita da lista.
 		 * 
@@ -63,6 +86,7 @@ class ListDE
 			if(raiz == NULL) //Se a lista estiver vazia, a raiz recebe o novo elemento e finaliza a função.
 			{
 				raiz = novo;
+				last = raiz;
 				size++; //Aumenta o tamanho da lista.
 				return;
 			}
@@ -74,9 +98,36 @@ class ListDE
 			}
 			aux->prox = novo; //Aloca o novo nó em sequência ao último nó.
 			novo->prev = aux; //Define o anterior do novo nó como o último nó.
+			last = novo;
 			
 			size++;//Incrementa o tamanho da lista.
 		}
 		
+		/* Insere um elemento à esquerda da lista.
+		 * 
+		 * v - valor do elemento que será inserido.
+		 */
+		void insertLeft(int v)
+		{
+			node *novo = (node *)malloc(sizeof(node)); //Aloca memória para o novo nó.
+			novo->valor = v;
+			novo->prox = NULL;
+			novo->prev = NULL;
+						
+			if(raiz == NULL) //Se a lista estiver vazia, a raiz recebe o novo elemento e finaliza a função.
+			{
+				raiz = novo;
+				last = raiz;
+				size++; //Aumenta o tamanho da lista.
+				return;
+			}
+			
+			raiz->prev = novo; //Aloca o  novo nó à esquerda da raiz.
+			novo->prox = raiz; //Define o próximo nó após o novo nó como a raiz.
+			raiz = novo; //A nova raiz recebe o endereço do novo nó.
+			
+			size++; //Incrementa o tamanho da lista.
+			
+		}
 		
 };
