@@ -71,7 +71,38 @@ class ListDE
 			}
 			printf("\n");//Pula uma linha para manter a organização.
 		}
-
+		
+		/* Informa o tamanho atual da lista.
+		 * 
+		 * retorno - o tamanho da lista.
+		 */
+		int getSize()
+		{
+			printf("Tamanho: %d\n", size);
+			return size;
+		}
+		
+		/* Verifica se a lista está vazia ou não.
+		 * 
+		 * retorno - true caso a lista esteja vazia ou false caso contrário.
+		 */
+		 bool isEmpty()
+		 {
+			 bool vazio = (raiz == NULL); //Calcula o valor lógico da expressão, verificando se a lista está vazia ou não.
+			 if(vazio)
+			 {
+				 printf("Lista vazia\n");
+				 return vazio;
+			 }
+			 else
+			 {
+				 printf("Lista nao vazia\n");
+				 return vazio;
+			 }
+			 
+			 return (raiz == NULL); //Retorna o 
+		 }
+		
 		/* Insere um elemento à direita da lista.
 		 * 
 		 * v - valor do elemento que será inserido.
@@ -128,6 +159,66 @@ class ListDE
 			
 			size++; //Incrementa o tamanho da lista.
 			
+		}
+		
+		/* Remove todos os elementos com o valor indicado.
+		 * 
+		 * v - valor dos elementos para remover.
+		 */
+		void removeValue(int v)
+		{
+			if(raiz == NULL)//Se a lista estiver vazia, encerra a função após informar isso.
+			{
+				printf("Lista vazia\n");
+				return;
+			}
+			
+			bool removeuAlgo = false; //Variável para verificar se algum elemento será removido.
+			
+			while(raiz->valor == v) //Se o valor da raiz for o valor a ser removido, torna o nó após a raiz a nova raiz.
+			{
+				raiz = raiz->prox;
+				size--; //Decrementa o tamanho.
+				if(raiz == NULL) //Se a lista ficou vazia, atualiza o last e finaliza a função.
+				{
+					last = NULL;
+					return;
+				}
+				raiz->prev = NULL;
+				removeuAlgo = true;
+				//Essa ação é repetida, pois a raiz é atualizada, então ela deve ser analizada de novo.
+			}
+
+			node *aux = raiz; //Nó auxiliar para percorrer a lista.
+			
+			while(aux != NULL)
+			{
+				if(aux->valor == v)
+				{
+					node *aux2 = aux->prev; //Nó auxiliar armazena o nó anterior ao atual.
+					aux2->prox = aux->prox; //O nó após o anterior se torna o próximo ao atual, excluindo o atual.
+					aux = aux->prox; //Nó atual se torna o próximo nó;
+					
+					if(aux!=NULL)//Se o próximo nó não for nulo, ele será atualizado.
+					{
+						aux->prev = aux2; //Define o nó anterior ao novo atual.
+					}
+					else //Se o próximo nó for nulo, atualiza o next, pois alterou o fim da lista.
+					{
+						last = aux2;
+					}
+					size--; //Decrementa o tamanho da lista.
+					removeuAlgo = true;//Indica que pelo menos um elemento foi removido.
+				}
+				else//Caso não seja necessário remover o elemento, avança para o próximo.
+				{
+					aux = aux->prox;
+				}
+			}
+			if(!removeuAlgo)//Se nenhum elemento foi removido, exibe essa informação.
+			{
+				printf("Nenhum elemento removido\n");
+			}
 		}
 		
 };
