@@ -274,55 +274,38 @@ class ListDE
 		    size--; //Decrementa o tamanho da lista.
 		}
 		
-		
-		
-		
-		//search value
-		//search index
+		/* Acha o elemento em uma determinada posição.
+		 * 
+		 * n - posição do elemento para encontrar (iniciando em 0).
+		 * retorno - o nó encontrado.
+		 */
+		node *searchIndex(int n)
+		{
+			if(n < 0) //Se o índice for inválido, encerra a função.
+			{
+				printf("Indice invalido\n");
+				return NULL;
+			}
+			
+			if(raiz == NULL)//Se a lista estiver vazia, encerra a função após informar isso.
+			{
+				printf("Lista vazia\n");
+				return NULL;
+			}
+			
+			node *aux = raiz; //Nó auxiliar para percorrer a lista.
+			
+			for(int i=0;i<n;i++)//Percorre n nós até chegar no nó que deve ser encontrado.
+		    {
+			   aux = aux -> prox;
+			   if(aux == NULL) //Caso não seja possível percorrer até o índice n, informa e encerra a função.
+			   {
+				   printf("A lista e menor do que o indice informado\n");
+				   return NULL;
+			   }
+		    }
+		   
+		    printf("Valor encontrado na posicao %d: %d\n", n, aux->valor); //Exibe o valor encontrado.
+		    return aux; //Retorna o elemento encontrado.
+		}
 };
-
-int main()
-{
-	ListDE L;
-
-
-	
-	L.removeValue(5);
-	L.insertLeft(2);L.printList();
-	L.insertLeft(2);L.printList();
-	L.insertLeft(4);L.printList();
-	L.insertLeft(5);L.printList();
-	L.insertLeft(6);L.printList();
-	L.insertLeft(7);L.printList();
-	L.insertLeft(88);L.printList();
-	L.insertLeft(67);L.printList();
-	L.insertLeft(54);L.printList();
-	L.insertLeft(3);L.printList();
-	L.insertLeft(1);L.printList();
-	L.insertLeft(8);L.printList();
-	
-	
-	L.removeIndex(-1);L.getSize();
-	L.printList();
-	L.printListReverse();
-	L.removeIndex(0);L.getSize();
-	L.printList();
-	L.printListReverse();
-	L.removeIndex(11);L.getSize();
-	L.printList();
-	L.printListReverse();
-	L.removeIndex(10	);L.getSize();
-	L.printList();
-	L.printListReverse();
-	L.removeIndex(5);L.getSize();
-	L.printList();
-	L.printListReverse();
-	
-
-	
-	
-	
-	
-	
-	return 0;
-}
