@@ -221,4 +221,108 @@ class ListDE
 			}
 		}
 		
+		/* Remove o elemento da lista na posição indicada.
+		 * 
+		 * n - a posição da lista para remover o elemento (iniciando em 0).
+		 */
+		void removeIndex(int n)
+		{
+			if(n < 0) //Se o índice for inválido, encerra a função.
+			{
+				printf("Indice invalido\n");
+				return;
+			}
+			
+			if(raiz == NULL)//Se a lista estiver vazia, encerra a função após informar isso.
+			{
+				printf("Lista vazia\n");
+				return;
+			}
+			
+			if(n == 0) //Caso o nó removido seja o primeiro, atualiza a raiz, removendo a anterior.
+			{
+				raiz = raiz->prox;
+				raiz->prev = NULL;
+				size--; //Decrementa o tamanho da lista.
+				return; //Encerra a função.
+			}
+			
+			node *aux = raiz; //Nó auxiliar para percorrer a lista.
+			
+			for(int i=0;i<n;i++)//Percorre n nós até chegar no nó que deve ser excluído.
+		    {
+			   aux = aux -> prox;
+			   if(aux == NULL) //Caso não seja possível percorrer até o índice n, informa e encerra a função.
+			   {
+				   printf("A lista e menor do que o indice informado\n");
+				   return;
+			   }
+		    }
+		   
+		    if(aux->prox == NULL) //Verifica se ainda há outro nó após o nó que será excluído.
+		    {
+			   last = aux->prev; //Caso o nó excluído seja o útimo, atualiza o last.
+			   last->prox = NULL;
+		    }
+		    else
+		    {
+			   node *aux2 = aux->prox; //Nó auxiliar para poder atualizar os nós.
+			   aux = aux->prev; //Retorna ao nó anterior ao excluído.
+			   aux->prox = aux2; //Nó anterior ao excluído aponta para o nó após o excluído.
+			   aux2->prev = aux; //Nó após o excluído aponta o nó anterior como o nó antes do excluído.
+		    }
+		    size--; //Decrementa o tamanho da lista.
+		}
+		
+		
+		
+		
+		//search value
+		//search index
 };
+
+int main()
+{
+	ListDE L;
+
+
+	
+	L.removeValue(5);
+	L.insertLeft(2);L.printList();
+	L.insertLeft(2);L.printList();
+	L.insertLeft(4);L.printList();
+	L.insertLeft(5);L.printList();
+	L.insertLeft(6);L.printList();
+	L.insertLeft(7);L.printList();
+	L.insertLeft(88);L.printList();
+	L.insertLeft(67);L.printList();
+	L.insertLeft(54);L.printList();
+	L.insertLeft(3);L.printList();
+	L.insertLeft(1);L.printList();
+	L.insertLeft(8);L.printList();
+	
+	
+	L.removeIndex(-1);L.getSize();
+	L.printList();
+	L.printListReverse();
+	L.removeIndex(0);L.getSize();
+	L.printList();
+	L.printListReverse();
+	L.removeIndex(11);L.getSize();
+	L.printList();
+	L.printListReverse();
+	L.removeIndex(10);L.getSize();
+	L.printList();
+	L.printListReverse();
+	L.removeIndex(5);L.getSize();
+	L.printList();
+	L.printListReverse();
+	
+
+	
+	
+	
+	
+	
+	return 0;
+}
