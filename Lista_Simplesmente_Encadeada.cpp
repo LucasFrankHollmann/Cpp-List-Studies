@@ -97,37 +97,40 @@ class List
             size++; //Incrementa o tamanho da lista;
         }
         
-        /* Procura um elemento na lista. 
-         * 
-         * v - valor a ser encontrado.
-         * Retorno - a posição do elemento encontrado ou -1, caso o elemento não seja encontrado.
-         */
-        int search(int v) 
-        {
-            if(raiz == NULL) //Lista vazia, sem valores para procurar.
-            {
-                printf("Valor nao encontrado\n");
-                return -1;
-            }
-            
-            int pos = 0; //Variável para guardar a posição onde o valor foi encontrado (iniciando em 0).
-            node *aux = raiz;
-            
-            while(aux != NULL) //Percorre todos os nós inicializados.
-            {
-                if(aux->valor == v) //Se o nó atual possuir o valor buscado, informa que foi encontrado e sua posição. Após isso, retorna, saindo da função.
-                {
-					printf("Valor %d encontrado na posicao %d", v, pos);
-					return pos; //Retorna a posição do valor encontrado.
-				}
-                
-				aux = aux->prox; //O nó atual se torna o próximo nó.
-				pos++; //Incrementa a posição do nó atual.
-            }
-            printf("Valor nao encontrado\n"); //Caso o laço while anterior finalize sem encontrar o valor, informa que o valor não foi encontrado.
+/* Acha o elemento em uma determinada posição.
+		 * 
+		 * n - posição do elemento para encontrar (iniciando em 0).
+		 * retorno - o nó encontrado.
+		 */
+		node *searchIndex(int n)
+		{
+			if(n < 0) //Se o índice for inválido, encerra a função.
+			{
+				printf("Indice invalido\n");
+				return NULL;
+			}
 			
-			return -1; //Caso não encontre o valor buscado, retorna -1;
-        }
+			if(raiz == NULL)//Se a lista estiver vazia, encerra a função após informar isso.
+			{
+				printf("Lista vazia\n");
+				return NULL;
+			}
+			
+			node *aux = raiz; //Nó auxiliar para percorrer a lista.
+			
+			for(int i=0;i<n;i++)//Percorre n nós até chegar no nó que deve ser encontrado.
+		    {
+			   aux = aux -> prox;
+			   if(aux == NULL) //Caso não seja possível percorrer até o índice n, informa e encerra a função.
+			   {
+				   printf("A lista e menor do que o indice informado\n");
+				   return NULL;
+			   }
+		    }
+		   
+		    printf("Valor encontrado na posicao %d: %d\n", n, aux->valor); //Exibe o valor encontrado.
+		    return aux; //Retorna o elemento encontrado.
+		}
        
        /* Exibe o tamanho atual (quantidade de elementos) da lista.
         *
