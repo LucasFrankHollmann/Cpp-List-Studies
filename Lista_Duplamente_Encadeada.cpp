@@ -311,7 +311,7 @@ int main()
 	L.removeIndex(11);L.getSize();
 	L.printList();
 	L.printListReverse();
-	L.removeIndex(10);L.getSize();
+	L.removeIndex(10	);L.getSize();
 	L.printList();
 	L.printListReverse();
 	L.removeIndex(5);L.getSize();
