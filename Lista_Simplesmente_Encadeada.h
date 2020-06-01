@@ -97,12 +97,12 @@ class List
             size++; //Incrementa o tamanho da lista;
         }
         
-/* Acha o elemento em uma determinada posição.
+		/* Acha o elemento em uma determinada posição.
 		 * 
 		 * n - posição do elemento para encontrar (iniciando em 0).
 		 * retorno - o nó encontrado.
 		 */
-		node *searchIndex(int n)
+		int *searchIndex(int n)
 		{
 			if(n < 0) //Se o índice for inválido, encerra a função.
 			{
@@ -129,7 +129,7 @@ class List
 		    }
 		   
 		    printf("Valor encontrado na posicao %d: %d\n", n, aux->valor); //Exibe o valor encontrado.
-		    return aux; //Retorna o elemento encontrado.
+		    return &(aux->valor); //Retorna o elemento encontrado.
 		}
        
        /* Exibe o tamanho atual (quantidade de elementos) da lista.

@@ -279,7 +279,7 @@ class ListDE
 		 * n - posição do elemento para encontrar (iniciando em 0).
 		 * retorno - o nó encontrado.
 		 */
-		nodeDE *searchIndex(int n)
+		int *searchIndex(int n)
 		{
 			if(n < 0) //Se o índice for inválido, encerra a função.
 			{
@@ -306,6 +306,6 @@ class ListDE
 		    }
 		   
 		    printf("Valor encontrado na posicao %d: %d\n", n, aux->valor); //Exibe o valor encontrado.
-		    return aux; //Retorna o elemento encontrado.
+		    return &(aux->valor); //Retorna o elemento encontrado.
 		}
 };
